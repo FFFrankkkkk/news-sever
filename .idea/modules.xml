@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/news.iml" filepath="$PROJECT_DIR$/news.iml" />
-      <module fileurl="file://$PROJECT_DIR$/WebRoot/springweb.iml" filepath="$PROJECT_DIR$/WebRoot/springweb.iml" />
     </modules>
   </component>
 </project>

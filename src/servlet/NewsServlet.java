@@ -44,15 +44,14 @@ public class NewsServlet extends HttpServlet {
 			int result=newsService.add(news);
 			message.setResult(result);
 			if(result==1){
-				message.setMessage("添加新闻成功！请添加新的新闻！");
+				message.setMessage("添加新闻成功！");
 				message.setRedirectUrl("/news/news/manage/addNews.jsp");
 			}else if(result==0){
 				message.setMessage("添加新闻失败！请联系管理员！");
-				message.setRedirectUrl("/news/index.jsp");
+				message.setRedirectUrl("/user/manageUIMain/manageMain.jsp");
 			}
 			request.setAttribute("message", message);
-			getServletContext().getRequestDispatcher("/message.jsp").forward(request,response);
-			
+			getServletContext().getRequestDispatcher("/tool/message.jsp").forward(request,response);
 		}else if(type.equals("showNews")){
 			PageInformation pageInformation=new PageInformation();
 			Tool.getPageInformation("news", request, pageInformation);
@@ -153,8 +152,11 @@ public class NewsServlet extends HttpServlet {
 //			getServletContext().getRequestDispatcher("/index2.jsp").include(request,response);
 //			return;
             //newsTypes：所有新闻类别：all,国际,社会,体育,汽车,科学
-            String newsTypesString=new String(WebProperties.config.getString("newsTypes").getBytes("ISO-8859-1"),"UTF-8");
-            String[] newsTypes=newsTypesString.split(",");
+//            String newsTypesString=new String(WebProperties.config.getString("newsTypes").getBytes("ISO-8859-1"),"UTF-8");
+//            String[] newsTypes=newsTypesString.split(",");
+			String newsTypesString=new String(WebProperties.config.getString("newsTypes"));
+			System.out.println(newsTypesString);
+			String[] newsTypes=newsTypesString.split(",");
             //homePageNewsN：主页上，每类新闻最大条数
             Integer homePageNewsN=Integer.parseInt(WebProperties.config.getString("homePageNewsN"));
             List<List<News>>  newsesList=newsService.getByTypesTopN2(newsTypes, homePageNewsN);
@@ -169,7 +171,10 @@ public class NewsServlet extends HttpServlet {
             String jsonString= gson.toJson(list);//将对象转换成json格式的字符串
             Tool.returnJsonString(response, jsonString);//返回客户端
 		}else if(type.equals("showNewsByNewsType")){//主页多个分类新闻区			
-			List<NewsType> newsTypes=(List<NewsType>)this.getServletContext().getAttribute("newsTypes");
+//			List<NewsType> newsTypes=(List<NewsType>)this.getServletContext().getAttribute("newsTypes")
+			String newsTypesString=new String(WebProperties.config.getString("newsTypes"));
+			System.out.println(newsTypesString);
+			String[] newsTypes=newsTypesString.split(",");
 			PageInformation pageInformation=new PageInformation();
 			Tool.getPageInformation("news", request, pageInformation);
 			String newsType=request.getParameter("newsType");

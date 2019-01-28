@@ -44,43 +44,88 @@ public class UserServlet extends HttpServlet {
 		UserService userService = new UserService();
 		Message message = new Message();
 		if (type.equals("register")) {
-			PrintWriter out = response.getWriter();
-			User user = new User();
+//			PrintWriter out = response.getWriter();
+//			User user = new User();
+//			user.setType(request.getParameter("type"));
+//			user.setName(request.getParameter("name"));
+//			user.setPassword(request.getParameter("password"));
+//			user.setEmail(request.getParameter("emailNumber"));
+//			user.setPhone(request.getParameter("phoneNumber"));
+//			if (user.getType().equals("user"))
+//				user.setEnable("use");
+//			else
+//				user.setEnable("stop");
+//			int result = userService.register(user);
+//			//	message.setResult(result);
+//			if (result == 1) {
+//				out.println("注册成功");
+////				message.setMessage("注册成功！");
+////				message.setRedirectUrl("/news/user/free/login.jsp");
+//			} else if (result == 0) {
+//				out.println("同名用户已存在，请改名重新注册！");
+////				message.setMessage("同名用户已存在，请改名重新注册！");
+////				message.setRedirectUrl("/news/user/free/register.jsp");
+//			} else if (result == -2) {
+//				out.println("邮箱已存在，请改名重新注册！");
+////                message.setMessage("邮箱已存在，请改名重新注册！");
+////                message.setRedirectUrl("/news/user/free/register.jsp");
+//			} else if (result == -3) {
+//				out.println("手机已被注册，请改名重新注册！");
+////                message.setMessage("手机已被注册，请改名重新注册！");
+////                message.setRedirectUrl("/news/user/free/register.jsp");
+//			} else {
+//				out.println("注册失败！");
+////				message.setMessage("注册失败！");
+////				message.setRedirectUrl("/news/user/free/register.jsp");
+//			}
+////			request.setAttribute("message", message);
+////			getServletContext().getRequestDispatcher("/message.jsp").forward(request,response);
+//			return;
+
+			User user=new User();
 			user.setType(request.getParameter("type"));
 			user.setName(request.getParameter("name"));
 			user.setPassword(request.getParameter("password"));
-			user.setEmail(request.getParameter("emailNumber"));
-			user.setPhone(request.getParameter("phoneNumber"));
-			if (user.getType().equals("user"))
+			user.setEmail(request.getParameter("email"));
+			if(user.getType().equals("user"))
 				user.setEnable("use");
 			else
 				user.setEnable("stop");
-			int result = userService.register(user);
-			//	message.setResult(result);
-			if (result == 1) {
-				out.println("注册成功");
-//				message.setMessage("注册成功！");
-//				message.setRedirectUrl("/news/user/free/login.jsp");
-			} else if (result == 0) {
-				out.println("同名用户已存在，请改名重新注册！");
-//				message.setMessage("同名用户已存在，请改名重新注册！");
-//				message.setRedirectUrl("/news/user/free/register.jsp");
-			} else if (result == -2) {
-				out.println("邮箱已存在，请改名重新注册！");
-//                message.setMessage("邮箱已存在，请改名重新注册！");
-//                message.setRedirectUrl("/news/user/free/register.jsp");
-			} else if (result == -3) {
-				out.println("手机已被注册，请改名重新注册！");
-//                message.setMessage("手机已被注册，请改名重新注册！");
-//                message.setRedirectUrl("/news/user/free/register.jsp");
-			} else {
-				out.println("注册失败！");
-//				message.setMessage("注册失败！");
-//				message.setRedirectUrl("/news/user/free/register.jsp");
+
+			String checkCode = request.getParameter("checkCode");
+			HttpSession session=request.getSession();
+			String severCheckCode=(String)session.getAttribute("checkCode");//获取session中的验证码
+
+			int result;
+			if(severCheckCode==null ){//服务器端验证图片验证码不存在
+				message.setResult(-3);
+				message.setMessage("注册失败！服务器端验证图片验证码不存在，请重新注册！");
+				message.setRedirectUrl("/news2/user/public/register.jsp");
+			}else if(!severCheckCode.equals(checkCode)){//服务器端验证图片验证码验证失败
+				message.setResult(-4);
+				message.setMessage("注册失败！服务器端验证图片验证码验证失败，请重新注册！");
+				message.setRedirectUrl("/news2/user/public/register.jsp");
+			}else{//验证码验证正确
+				result=userService.register(user);
+				message.setResult(result);
+				if(result==1){
+					message.setMessage("注册成功！");
+					message.setRedirectUrl("/news2/user/public/login.jsp");
+				}else if(result==0){
+					message.setMessage("同名用户已存在，请改名重新注册！");
+					message.setRedirectUrl("/news2/user/public/register.jsp");
+				}else if(result==-1){
+					message.setMessage("电子邮箱已被使用，请换一个电子邮箱重新注册！");
+					message.setRedirectUrl("/news2/user/public/register.jsp");
+				}else{
+					message.setMessage("注册失败！请重新注册！");
+					message.setRedirectUrl("/news2/user/public/register.jsp");
+				}
 			}
-//			request.setAttribute("message", message);
-//			getServletContext().getRequestDispatcher("/message.jsp").forward(request,response);
-			return;
+			Gson gson = new Gson();
+			String jsonString= gson.toJson(message);
+			Tool.returnJsonString(response, jsonString);
+
 		} else if (type.equals("login")) {
 			PrintWriter out = response.getWriter();
 			String checkCode = request.getParameter("checkCode");

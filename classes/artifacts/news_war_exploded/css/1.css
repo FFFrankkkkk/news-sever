@@ -20,38 +20,49 @@
 	margin-right: auto;
 	margin-bottom: 5px;
 	border-collapse:collapse;
+	table-layout:fixed;
 }
 
 td{
 	margin:0;
-	padding:2px;	
+	padding:2px;
 }
 
 .trDefault {
 	border: 1px solid #F5EDFB;
 }
 
-tr:nth-child(odd){
-	background-color: #FBF9FD;	
+.tdDefault{
+	height-line:18px;
+	text-overflow:ellipsis;/*当文本溢出时显示…此时还必须定义：
+	强制文本在一行内显示（white-space:nowrap）及溢出内容为隐藏（overflow:hidden）*/
+	white-space:nowrap;/*表示文本不会换行*/
+	word-break:keep-all;/* 不换行 */
+	overflow:hidden;/*表示溢出的内容会被隐藏*/
 }
 
-tr:nth-child(n+1):nth-child(-n+100):hover {
-    background-color: #E1D3F0;
+tr:nth-child(odd){
+	background-color: #FBF9FD;
 }
 
 /*取消超链接的下划线*/
 a:link {
 	text-decoration: none;
+	color: #000000; /*连接默认的颜色变化*/
 }
 a:visited {
 	text-decoration: none;
 }
 a:hover {
-	text-decoration: none;
+	text-decoration: underline;
+	color: #ff0000; /*鼠标经过的颜色变化*/
 }
 a:active {
 	text-decoration: none;
+	color: #00BFFF; /*鼠标按下的颜色变化*/
 }
+
+
 
 .model {
 	height: 100%;
@@ -63,7 +74,7 @@ a:active {
 	display: none;
 }
 
-.modelContent {	
+.modelContent {
 	width:400px;
 	margin-right: auto;
 	margin-left: auto;
@@ -105,21 +116,46 @@ a:active {
 }
 
 .mainPageUl {
-	background-image: url(/news/images/item.png);
+	background-image: url(/news2/images/item.png);
 	background-position: 0px 6px;
 	padding-left: 8px;
 	background-repeat: no-repeat;
+	height-line:15px;
+	text-overflow:ellipsis;/*当文本溢出时显示…此时还必须定义：
+	强制文本在一行内显示（white-space:nowrap）及溢出内容为隐藏（overflow:hidden）*/
+	white-space:nowrap;/*表示文本不会换行*/
+	word-break:keep-all;/* 不换行 */
+	overflow:hidden;/*表示溢出的内容会被隐藏*/
+}
+
+.right{
+	text-align: right;
+	width: 130px;
 }
 
 .invisibleTable {
 	border: none;
 	width:100%;
+	table-layout:fixed;
+}
+
+.manageMain_right{
+	width: 524px;
+	height: 450px;
+	margin-top: 2px;
+	border: 1px solid #333333;
+	position: absolute;
+	left: 205px;
+	padding-left: 30px;
+	padding-right: 30px;
+	line-height: 18px;
+	padding-top: 30px;
 }
 
 .newsColumn{
-    background: url(/news/images/bg1px.png) 0 -33px repeat-x;
-    line-height: 34px;
-    height: 34px;
+	background: url(/news2/images/bg1px.png) 0 -33px repeat-x;
+	line-height: 34px;
+	height: 34px;
 }
 
 .newsShowByType_frame {
@@ -129,21 +165,22 @@ a:active {
 	right:0;
 }
 
+/*manageMain.jsp 和 newsShowByType.jsp共有的class*/
 .newsShowByType_left   {
 	width: 138px;
-	height: 400px;
+	height: 450px;
 	border: 1px solid #333333;
 	margin-right: 2px;
 	margin-top: 2px;
 	position: absolute;
 	padding-left: 40px;
 	line-height: 30px;
-	padding-top: 30px;		
+	padding-top: 30px;
 }
-
+/* newsShowByType.jsp*/
 .newsShowByType_rightTop   {
 	width: 524px;
-	height: 320px;
+	height: 350px;
 	margin-top: 2px;
 	border-right: 1px solid #333333;
 	border-top: 1px solid #333333;
@@ -157,9 +194,10 @@ a:active {
 	padding-top: 30px;
 }
 
+/* newsShowByType.jsp*/
 .newsShowByType_rightBottom   {
 	width: 524px;
-	height: 50px;
+	height: 100px;
 	border-right: 1px solid #333333;
 	border-top: 0px;
 	border-bottom:1px solid #333333;
@@ -174,7 +212,7 @@ a:active {
 }
 
 .newsShowByType_news_ul {
-	list-style-image: url(/news/images/item.png);
+	list-style-image: url(/news2/images/item.png);
 	list-style-position: inside;
 }
 
@@ -188,77 +226,77 @@ a:active {
 .commentsHead{
 	padding-bottom: 10px;
 	font-size: 16px;
-    font-family: 'Microsoft YaHei',Hei,arial,sans-serif;
+	font-family: 'Microsoft YaHei',Hei,arial,sans-serif;
 	width:600px;
 }
 
 .commentIcon{
 	width: 38px;
 	height:38px;
-    float: left;
+	float: left;
 }
 
 .comment1{
 	float: left;
-    padding-left: 14px;
+	padding-left: 14px;
 }
 .commentAuthor{
 	font-size: 14px;
-    color: #00bc3e;	
+	color: #00bc3e;
 }
 .commentTime{
 	font-size: 14px;
-    color: #bbb;
+	color: #bbb;
 	margin-top:4px;
 }
 .comment2{
 	float: right;
-    font-size: 14px;
-    height: 100%;
+	font-size: 14px;
+	height: 100%;
 }
 .comment4{
 	float: right;
 }
 .commentPraiseA{
-	display: inline-block;	
-    width: 14px;
-    height: 14px;
-    background: url(http://p3.qhimg.com/t01539eaa3e45dc968b.png) no-repeat;
-    cursor: pointer;
+	display: inline-block;
+	width: 14px;
+	height: 14px;
+	background: url(/news2/images/praise.png) no-repeat;
+	cursor: pointer;
 	opacity:0.4;
 }
 .commentPraiseText{
-	margin-left: .46154em;	
+	margin-left: .46154em;
 }
 
 .comment3{
-    float: right;
-    padding-left: 10px;
-    color: #bbb;
-    height: 100%;	
+	float: right;
+	padding-left: 10px;
+	color: #bbb;
+	height: 100%;
 }
 .commentReplay{
-    font-size: 12px;
-    width: 34px;
-    height: 14px;
-    color: #ccc;
-    margin-right: 10px;
-    cursor: pointer;	
+	font-size: 12px;
+	width: 34px;
+	height: 14px;
+	color: #ccc;
+	margin-right: 10px;
+	cursor: pointer;
 }
 
 .commentContent{
-    font-size: 14px;
-    line-height: 24px;
-    color: #333;
-    padding-right: 14px;
-    word-wrap: break-word;	
+	font-size: 14px;
+	line-height: 24px;
+	color: #333;
+	padding-right: 14px;
+	word-wrap: break-word;
 }
 
 .comment5{
-    padding-top: 4px;
-    padding-left: 52px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #eee;	
+	padding-top: 4px;
+	padding-left: 52px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #eee;
 }
 
 .tail{
@@ -266,21 +304,8 @@ a:active {
 	text-align:center;
 	font-size: 12px;
 	line-height:20px;
-	margin-top:15px	
-	
-}
+	margin-top:15px
 
-.manageMain_right{
-	width: 524px;
-	height: 400px;
-	margin-top: 2px;
-	border: 1px solid #333333;	
-	position: absolute;
-	left: 205px;
-	padding-left: 30px;
-	padding-right: 30px;
-	line-height: 30px;
-	padding-top: 30px;
 }
 
 .logleft{
@@ -298,44 +323,3 @@ a:active {
 .logRightInner{
 	position:absolute;bottom:0px;padding:0px;margin:0px;
 }
-.userLogin{
-
-}
-.phoneLogin{
-	display: none;
-}
-.loginChoice1{
-	height: 30px;
-	width: 100px;
-	margin-left: 480px;
-	margin-top: 20px;
-	float: left;
-	border-bottom: 1px solid  #A8A297;;
-	position:relative;
-	text-align: center;
-	color: #A8A297;
-	cursor: pointer;
-}
-.loginChoice2{
-	height: 30px;
-	width: 100px;
-	margin-top: 20px;
-	float: left;
-	border-bottom: 1px solid #A8A297;
-	padding-left: auto;
-	text-align: center;
-	color:  #A8A297;
-	cursor: pointer;
-}
-.loginChoice3{
-	height: 30px;
-	width: 100px;
-	margin-top: 20px;
-	float: left;
-	border-bottom: 1px solid #A8A297;
-	padding-left: auto;
-	text-align: center;
-	color:  #A8A297;
-	cursor: pointer;
-}
-

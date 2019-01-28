@@ -166,12 +166,8 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-
-import com.mchange.v2.c3p0.*;
-
+import com.mchange.v2.c3p0.ComboPooledDataSource;
 import java.sql.PreparedStatement;
-
-
 public class DatabaseDao {
 	//数据库连接池
 	static ComboPooledDataSource dataSource=new ComboPooledDataSource("mysql");

@@ -9,6 +9,13 @@
 	
 	String rootPath = application.getRealPath( "/" );
 	
-	out.write( new ActionEnter( request, rootPath ).exec() );
-	
+	//以下是被修改的内容，主要是让在线管理图片功能中的图片的网址符合要求
+	String action = request.getParameter("action");
+	String result = new ActionEnter( request, rootPath ).exec();
+	if( action!=null && 
+	   (action.equals("listfile") || action.equals("listimage") ) ){
+	    rootPath = rootPath.replace("\\", "/");
+	    result = result.replaceAll(rootPath, "/");
+	}
+	out.write( result );
 %>
