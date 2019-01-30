@@ -5,8 +5,8 @@
 <!doctype html>
 <html>
   <head>
- 	<script type="text/javascript" src="/news2/plugin/jquery/jquery-3.2.1.min.js"></script>
- 	<link href="/news2/css/1.css" rel="stylesheet" type="text/css">
+ 	<script type="text/javascript" src="/news/plugin/jquery/jquery-3.2.1.min.js"></script>
+ 	<link href="/news/css/1.css" rel="stylesheet" type="text/css">
 	<script src='<%=WebProperties.config.getString("ueditConfigJs")%>'	type="text/javascript"></script>
 	<script src='<%=WebProperties.config.getString("ueditJs")%>'	type="text/javascript"></script>
 	<script src='<%=WebProperties.config.getString("ueditLang")%>'	type="text/javascript"></script>
@@ -14,7 +14,7 @@
   
   <body>
    <div class="div-out"> 
-	<form action="/news2/servlet/NewsServlet?type1=edit&newsId=${requestScope.news.newsId}" 
+	<form action="/news/servlet/NewsServlet?type1=edit&newsId=${requestScope.news.newsId}"
 				id="myform" method="post" onsubmit="return submit1()">
 		<table width="800" align="center" border="1">
 			<tbody>
@@ -83,7 +83,7 @@
 			/*ids1 =$("#ids"); 
 		  	ids1.val("");
 		  	//提交
-			var path="/news2/servlet/NewsServlet?type1=manageNews&page="
+			var path="/news/servlet/NewsServlet?type1=manageNews&page="
 				+${requestScope.pageInformation.page}+"&pageSize=5";
 	  		location.href = path;*/
 	  		window.close();

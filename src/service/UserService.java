@@ -36,9 +36,9 @@ public class UserService {
 			else if(UserDao.hasEmail(user, databaseDao)){
 				return -2;//失败，邮箱已存在
 			}
-            else if(UserDao.hasPhone(user,databaseDao)){
-                return -3;
-            }
+//            else if(UserDao.hasPhone(user,databaseDao)){
+//                return -3;
+//            }
               else{//没有同名用户，可以注册
 				Encryption.encryptPassword(user);
 				if(UserDao.register(user, databaseDao)>0)

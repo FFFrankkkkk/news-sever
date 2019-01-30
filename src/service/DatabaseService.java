@@ -57,9 +57,10 @@ public class DatabaseService {
 				databasebackup.setDirectory(backupFullPath);
 				DatabasebackupDao databasebackupDao=new DatabasebackupDao();
 				//保存数据库备份信息到数据库
-				if( databasebackupDao.add(databasebackup)>0 )
-					message.setMessage(message.getMessage()+"<br>备份信息已添加至数据库。");
-				else
+				if( databasebackupDao.add(databasebackup)>0 ) {
+					message.setMessage(message.getMessage() + "<br>备份信息已添加至数据库。");
+					System.out.println("Success backup database");
+				}else
 					message.setMessage(message.getMessage()+"<br>备份信息添加至数据库失败！");
 			}			
         } catch (IOException e) {  

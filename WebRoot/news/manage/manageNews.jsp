@@ -5,21 +5,21 @@
 <html>
  <head>
  	<meta charset="utf-8">
- 	<link href="/news2/css/1.css" rel="stylesheet" type="text/css">
- 	<script type="text/javascript" src="/news2/plugin/jquery/jquery-3.2.1.min.js"></script>
+ 	<link href="/news/css/1.css" rel="stylesheet" type="text/css">
+	 <script type="text/javascript" src="/news/plugin/jquery/jquery-3.2.1.min.js"></script>
 	<script type="text/javascript">
 		function deleteANews(id){
 			ids1 = $("#ids");
 			ids1.val(id);
 			//提交
-			$( "#rightDiv" ).load( "/news2/servlet/NewsServlet?type1=deleteANews",$("#myform").serialize());
+			$( "#rightDiv" ).load( "/news/servlet/NewsServlet?type1=deleteANews",$("#myform").serialize());
 		}
 		function editsANew(id){
 			ids1 = $("#ids");
 			ids1.val(id);
 			//提交
 			$("#myform").attr("target","_blank");
-			var path="/news2/servlet/NewsServlet?type1=editANews";
+			var path="/news/servlet/NewsServlet?type1=editANews";
 			$('#myform').attr("action", path).submit();
 		}	
 		function getOnePage(type){
@@ -47,7 +47,7 @@
 		  	ids1 = $("#ids");
 		  	ids1.val("");
 		  	
-		  	$( "#rightDiv" ).load( "/news2/servlet/NewsServlet?type1=manageNews&page="+page.val()+"&pageSize=2");      	
+		  	$( "#rightDiv" ).load( "/news/servlet/NewsServlet?type1=manageNews&page="+page.val()+"&pageSize=2");
 		}
 	</script>
 	  

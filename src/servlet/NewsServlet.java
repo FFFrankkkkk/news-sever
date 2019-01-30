@@ -101,13 +101,15 @@ public class NewsServlet extends HttpServlet {
 			int result=newsService.update(news);
 			message.setResult(result);
 			if(result==1){
-				message.setMessage("添加新闻成功！请添加新的新闻！");
+				message.setMessage("修改新闻成功！");
+				message.setRedirectUrl("/news/servlet/NewsServlet?type1=showANews&newsId="+news.getNewsId()+"&page=1&pageSize=5");
 			}else if(result==0){
-				message.setMessage("添加新闻失败！请联系管理员！");
+				message.setMessage("修改新闻失败！请联系管理员！");
+				message.setRedirectUrl("/user/manageUIMain/manageMain.jsp");
 			}
 			message.setRedirectTime(1000);
 			request.setAttribute("message", message);
-			getServletContext().getRequestDispatcher("/message.jsp").forward(request,response);
+			getServletContext().getRequestDispatcher("/tool/message.jsp").forward(request,response);
 		}else if(type.equals("homepageTypes1")){//主页多个分类新闻区			
 			String newsTypesString=new String(WebProperties.config.getString("newsTypes").getBytes("ISO-8859-1"),"UTF-8");
 			String[] newsTypes=newsTypesString.split(",");

@@ -100,26 +100,26 @@ public class UserServlet extends HttpServlet {
 			if(severCheckCode==null ){//服务器端验证图片验证码不存在
 				message.setResult(-3);
 				message.setMessage("注册失败！服务器端验证图片验证码不存在，请重新注册！");
-				message.setRedirectUrl("/news2/user/public/register.jsp");
+				message.setRedirectUrl("/news/user/public/register.jsp");
 			}else if(!severCheckCode.equals(checkCode)){//服务器端验证图片验证码验证失败
 				message.setResult(-4);
 				message.setMessage("注册失败！服务器端验证图片验证码验证失败，请重新注册！");
-				message.setRedirectUrl("/news2/user/public/register.jsp");
+				message.setRedirectUrl("/news/user/public/register.jsp");
 			}else{//验证码验证正确
 				result=userService.register(user);
 				message.setResult(result);
 				if(result==1){
 					message.setMessage("注册成功！");
-					message.setRedirectUrl("/news2/user/public/login.jsp");
+					message.setRedirectUrl("/news/user/public/login.jsp");
 				}else if(result==0){
 					message.setMessage("同名用户已存在，请改名重新注册！");
-					message.setRedirectUrl("/news2/user/public/register.jsp");
+					message.setRedirectUrl("/news/user/public/register.jsp");
 				}else if(result==-1){
 					message.setMessage("电子邮箱已被使用，请换一个电子邮箱重新注册！");
-					message.setRedirectUrl("/news2/user/public/register.jsp");
+					message.setRedirectUrl("/news/user/public/register.jsp");
 				}else{
 					message.setMessage("注册失败！请重新注册！");
-					message.setRedirectUrl("/news2/user/public/register.jsp");
+					message.setRedirectUrl("/news/user/public/register.jsp");
 				}
 			}
 			Gson gson = new Gson();
@@ -179,13 +179,17 @@ public class UserServlet extends HttpServlet {
 			}
 			//	return;
 		}else if (type.equals("showPage")) {
-			PageInformation pageInformation = new PageInformation();
-			Tool.getPageInformation("user", request, pageInformation);
-			List<User> users = userService.getOnePage(pageInformation);
-			request.setAttribute("pageInformation", pageInformation);
-			request.setAttribute("users", users);
-			getServletContext().getRequestDispatcher("/manager/userShow.jsp").forward(request, response);
-		} else if (type.equals("search")) {
+            PageInformation pageInformation=new PageInformation();
+            Tool.getPageInformation("user", request, pageInformation);
+            //Tool.getPageInformationFromBootstrapTable("user", request, pageInformation);
+
+            List<User> users=userService.getOnePage(pageInformation);
+
+            Gson gson = new Gson();
+            String usersJsonString= gson.toJson(users);
+            String jsonString = "{\"total\":" + pageInformation.getAllRecordCount() + ",\"rows\":" + usersJsonString + "}";
+            Tool.returnJsonString(response, jsonString);
+        } else if (type.equals("search")) {
 			PageInformation pageInformation = new PageInformation();
 			Tool.getPageInformation("user", request, pageInformation);
 			pageInformation.setSearchSql(SearchTool.user(request));

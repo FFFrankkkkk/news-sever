@@ -51,9 +51,19 @@
         <description>验证码</description>
         <servlet-name>ImageCheckCodeServlet</servlet-name>
         <servlet-class>servlet.ImageCheckCodeServlet</servlet-class>
-
     </servlet>
-
+  <servlet>
+    <servlet-name>StatisticServlet</servlet-name>
+    <servlet-class>servlet.StatisticServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AutoGeneratorServlet</servlet-name>
+    <servlet-class>servlet.AutoGeneratorServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>DatabaseServlet</servlet-name>
+    <servlet-class>servlet.DatabaseServlet</servlet-class>
+  </servlet>
     <servlet-mapping>
     <servlet-name>UserServlet</servlet-name>
     <url-pattern>/servlet/UserServlet</url-pattern>
@@ -78,6 +88,18 @@
         <servlet-name>ImageCheckCodeServlet</servlet-name>
         <url-pattern>/servlet/ImageCheckCodeServlet</url-pattern>
     </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>StatisticServlet</servlet-name>
+    <url-pattern>/servlet/StatisticServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AutoGeneratorServlet</servlet-name>
+    <url-pattern>/servlet/AutoGeneratorServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>DatabaseServlet</servlet-name>
+    <url-pattern>/servlet/DatabaseServlet</url-pattern>
+  </servlet-mapping>
     <filter>
         <filter-name>CorsFilter</filter-name>
         <filter-class>filter.CorsFilter</filter-class>
